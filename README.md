@@ -117,4 +117,4 @@ This is an MVP, and these are the gaps between it and something you'd run at sca
 
 ## Further reading
 
-I wrote the build up as a seven-part series: [Read it on Medium](https://medium.com/@padmasree.91004/designing-an-observability-platform-for-a-gemini-powered-ai-agent-1e8104b1dfe6) *(replace with the series link)*.
+I wrote the build up as a seven-part series: [Read it on Medium](https://medium.com/@padmasree.91004/designing-an-observability-platform-for-a-gemini-powered-ai-agent-1e8104b1dfe6).
