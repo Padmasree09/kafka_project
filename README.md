@@ -12,11 +12,11 @@ If you call an LLM API from production code, the provider gives you an aggregate
 
 The platform was designed around three questions about an LLM-powered application.
 
-| Question | Status |
-|---|---|
-| How many times is the API called, and how fast does it respond? | Built (Call Volume panel) |
-| What does it cost, per model and per day? | Built (Cost panel) |
-| Are the responses actually good? | Not built yet (see [Known limitations](#known-limitations)) |
+| Question                                                        | Status                                                      |
+| --------------------------------------------------------------- | ----------------------------------------------------------- |
+| How many times is the API called, and how fast does it respond? | Built (Call Volume panel)                                   |
+| What does it cost, per model and per day?                       | Built (Cost panel)                                          |
+| Are the responses actually good?                                | Not built yet (see [Known limitations](#known-limitations)) |
 
 ---
 
@@ -24,7 +24,7 @@ The platform was designed around three questions about an LLM-powered applicatio
 
 ![Observability dashboard](docs/dashboard.png)
 
-*Demo data: a handful of real Gemini calls sent through the full pipeline. The dashboard reads straight from SQLite and updates on every refresh.*
+_Demo data: a handful of real Gemini calls sent through the full pipeline. The dashboard reads straight from SQLite and updates on every refresh._
 
 ---
 
@@ -52,15 +52,15 @@ queries.py  →  Streamlit dashboard
 
 ### Repository layout
 
-| File | Role |
-|---|---|
-| `gemini_client.py` | Instrumented wrapper around the Gemini API (`gemini_call_instrumented`) |
-| `producer.py` | Publishes events to Kafka |
-| `consumer.py` | Reads events, deduplicates via Redis, enriches with cost, stores them |
-| `cost_calculator.py` | Per-model price table and cost calculation |
-| `storage.py` | SQLite schema and writes |
-| `queries.py` | SQL queries behind each dashboard panel |
-| `app.py` | Streamlit dashboard |
+| File                 | Role                                                                    |
+| -------------------- | ----------------------------------------------------------------------- |
+| `gemini_client.py`   | Instrumented wrapper around the Gemini API (`gemini_call_instrumented`) |
+| `producer.py`        | Publishes events to Kafka                                               |
+| `consumer.py`        | Reads events, deduplicates via Redis, enriches with cost, stores them   |
+| `cost_calculator.py` | Per-model price table and cost calculation                              |
+| `storage.py`         | SQLite schema and writes                                                |
+| `queries.py`         | SQL queries behind each dashboard panel                                 |
+| `app.py`             | Streamlit dashboard                                                     |
 
 This repo contains the instrumentation wrapper and a test script that generates real calls. It does not include an LLM application; the wrapper is meant to sit in front of whatever calls Gemini.
 
@@ -71,8 +71,8 @@ This repo contains the instrumentation wrapper and a test script that generates 
 **Prerequisites:** Python 3.10+, a Kafka broker on `localhost:9092`, Redis on `localhost:6379`, and a Gemini API key.
 
 ```bash
-git clone https://github.com/<your-username>/<repo-name>.git
-cd <repo-name>
+git clone https://github.com/Padmasree09/kafka_project.git
+cd kafka_project
 
 python -m venv .venv
 source .venv/bin/activate          # Windows: .venv\Scripts\activate
