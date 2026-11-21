@@ -68,7 +68,19 @@ This repo contains the instrumentation wrapper and a test script that generates 
 
 ## Quickstart
 
-**Prerequisites:** Python 3.10+, a Kafka broker on `localhost:9092`, Redis on `localhost:6379`, and a Gemini API key.
+**Prerequisites:** Python 3.10+, Docker, and a Gemini API key.
+
+**1. Start Kafka and Redis, and create the topic** (first time only):
+
+```bash
+docker run -d --name kafka-local -p 9092:9092 apache/kafka:latest
+docker run -d --name redis-local -p 6379:6379 redis:7.2-alpine
+docker exec -it kafka-local /opt/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --create --topic llm.request.completed.v1 --partitions 3
+```
+
+On later runs, `docker start kafka-local redis-local` is enough.
+
+**2. Set up the project:**
 
 ```bash
 git clone https://github.com/Padmasree09/kafka_project.git
@@ -87,6 +99,12 @@ Run each in its own terminal:
 python consumer.py                 # 1. start the consumer
 python producer.py                 # 2. send a test call through the pipeline
 streamlit run app.py               # 3. open the dashboard
+```
+
+To see the raw events sitting in the topic:
+
+```bash
+docker exec -it kafka-local /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic llm.request.completed.v1 --from-beginning
 ```
 
 ---
@@ -117,4 +135,4 @@ This is an MVP, and these are the gaps between it and something you'd run at sca
 
 ## Further reading
 
-I wrote the build up as a seven-part series: [Read it on Medium](https://medium.com/@padmasree.91004/designing-an-observability-platform-for-a-gemini-powered-ai-agent-1e8104b1dfe6).
+I wrote the build up as a seven-part series: [Read it on Medium](https://medium.com/@padmasree.91004).
